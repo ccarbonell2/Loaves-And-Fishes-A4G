@@ -8,7 +8,7 @@ function Preferences() {
                 you'll get everything that you want and nothing that you do not want.
             </h1>
             <Panel title="Household" isActive={true}>
-                How many people live in your house?
+                How many people are in your house?
                 How many babies live in your house?
                 How many children and teens live in your house?
                 How many adults live in your house?
