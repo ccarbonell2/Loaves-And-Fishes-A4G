@@ -8,11 +8,13 @@ import Footer from './Components/Footer';
 
 function App() {
   return (
-    <div >
+    <div>
+      
       <Header />
       <HelloWorld name="CC"/>
       <CounterExample />
       <Footer />
+  
     </div>
   );
 }
