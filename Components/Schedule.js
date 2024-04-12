@@ -2,17 +2,6 @@ import React from 'react';
 import Navigation from './Navigation';
 import { useState } from 'react';
 function Schedule() {
- //Firebase initialization code from Gyata AI: https://www.gyata.ai/nodejs/node-js-with-firebase/
- var admin = require('firebase-admin');
-
- var serviceAccount = require('C:\\Users\\user\\loaves-and-fishes-a4g\\src\\test-2395a-firebase-adminsdk-9uo81-6c3d21aea1.json');
- admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-  });
-
-  var db = admin.firestore();
-
-  var user = db.collection('volunteer').doc('Joe Volunteer');
 
   //Based form code on example code from w3schools: https://www.w3schools.com/react/react_forms.asp
   const[start, setStart] = useState("");
@@ -21,9 +10,6 @@ function Schedule() {
 
   const signUp = event => {
     event.preventDefault();
-    var setAda = user.set({
-      name: 'Phillip Volunteer'
-    })
     alert(`You have signed up to volunter on '${date}' from '${start}' to '${end}'`);
   }
 
