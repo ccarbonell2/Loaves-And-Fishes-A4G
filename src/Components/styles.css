@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.nav {
+    background-color: #A8201A;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.site-title {
+    font-size: 2rem;
+}
+
+.nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav a {
+   color: inherit; 
+   text-decoration: none;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   padding: .25rem;
+}
+
+.nav li.active {
+    background-color: #6A1511;
+}
+
+.nav li:hover {
+    background-color: #470E0B;
+}
+
+.collapsible {
+    background-color: #5998C5;
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+}
+
+.content {
+    padding: 0 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #FFFFFF;
+}
+
+.normButton {
+    background-color: #7BA05B;
+    color: #FFFFFF;
+}
+
+.activeBev {
+    border: 8px solid #E03616;
+    margin: 1%;
+    border-radius: 12px;
+}
+
+.inactiveButton {
+    border: 8px solid #58355E;
+    margin: 1%;
+    border-radius: 12px;
+}
