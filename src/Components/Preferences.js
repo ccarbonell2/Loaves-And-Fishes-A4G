@@ -37,6 +37,10 @@ import a4gCheese from "./Images/a4gCheese.png";
 import a4gBread from "./Images/a4gBread.png";
 import a4gEggs from "./Images/a4gEggs.png";
 
+/*import pool from './db';
+
+const connection = pool.connect();*/
+
 function Preferences() {
     return (
         <>
