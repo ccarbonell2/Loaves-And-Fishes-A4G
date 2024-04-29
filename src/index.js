@@ -9,6 +9,7 @@ import Navigation from './Components/Navigation';
 import Schedule from './Components/Schedule';
 import Home from './Components/Home';
 import Preferences from './Components/Preferences';
+import ClientSchedule from './Components/ClientSchedule';
 
 import {
   createBrowserRouter,
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     path: "Schedule",
     element: <Schedule />,
   },
+  {
+    path: "ClientSchedule",
+    element: <ClientSchedule />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
