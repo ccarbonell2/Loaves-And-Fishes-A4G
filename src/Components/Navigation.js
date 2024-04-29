@@ -8,10 +8,10 @@ export default function Navbar() {
 
         <ul>
             <li>
-                <Link to="/Schedule">Schedule</Link>
+                <Link to="/Client-Schedule">Client Signup</Link>
             </li>
             <li>
-                <Link to="/">Home</Link>
+                <Link to="/Schedule">Volunteer Signup</Link>
             </li>
             <li>
                 <Link to="/Preferences">Preferences</Link>
