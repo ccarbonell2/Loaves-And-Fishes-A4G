@@ -8,7 +8,7 @@ export default function Navbar() {
 
         <ul>
             <li>
-                <Link to="/Client-Schedule">Client Signup</Link>
+                <Link to="/ClientSchedule">Client Signup</Link>
             </li>
             <li>
                 <Link to="/Schedule">Volunteer Signup</Link>

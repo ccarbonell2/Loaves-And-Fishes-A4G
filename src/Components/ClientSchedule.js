@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import { useState } from 'react';
-function Schedule() {
+function ClientSchedule() {
 
   //Based form code on example code from w3schools: https://www.w3schools.com/react/react_forms.asp
   const[start, setStart] = useState("");
@@ -137,4 +137,4 @@ function Schedule() {
     
 };
 
-export default Schedule;
+export default ClientSchedule;
