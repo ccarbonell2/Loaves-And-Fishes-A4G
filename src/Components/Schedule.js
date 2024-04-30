@@ -23,7 +23,7 @@ function Schedule() {
       <Navigation />
       <h1>Sign up to volunteer</h1>
       
-      <p> {/*Text modified from monthly volunteer signup email written by Marilyn Martin */}
+      <p> {/*Text modified from monthly volunteer signup email written by Marilyn Martin*/}
         Loaves and Fishes is open on the third Saturday of every month, so volunteers are needed that morning as well as the preceeding afternoon and evening for setup.
         <br/><br/>
         Here is how you can help: 
