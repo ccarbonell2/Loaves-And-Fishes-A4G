@@ -11,7 +11,7 @@ function ClientSchedule() {
 
   function select(hr,min) {
     time.setHours(hr, min);
-    alert(`You have signed up for pickup on ${time.getDay()}, ${time.getMonth()} ${time.getDate()} at ${time}`);
+    alert(`You have signed up for pickup on ${time}`);
   }
 
   return (
