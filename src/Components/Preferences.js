@@ -42,21 +42,82 @@ import a4gEggs from "./Images/a4gEggs.png";
 const connection = pool.connect();*/
 
 function Preferences() {
+    /*variables*/
+    const [name, setName] = useState('First Last');
+    const [family, setFamily] = useState('1');
+
     return (
         <>
         <Header />
+            {/*General information*/}
             <h1>
-              Please tell us about you and the food you want. We will use this to fill a bag for you, but can't guarantee that 
-              you'll get everything that you want and nothing that you do not want.
+              Please tell us about you and the food you want. We will use this to fill a bag for you, but can't guarantee that you'll get everything that you want and nothing that you do not want.
             </h1>
-            <h2>Household</h2>
-                <h3>Please tell us about you and the people in your house.</h3>
+        
+            <form>
+                <label>
+                Username:{' '}
+                <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    name="name"
+                />
+                </label>
+                <br />
+
+                <label>
+                Number of people in the household:{' '}
+                <input
+                    value={family}
+                    onChange={(e) => setFamily(e.target.value)}
+                    type="number"
+                    name="family"
+                />
+                </label>
+                <br />
+
+                <label>
+                Please list any allergies or dietary restrictions:{' '}
+                <input type="text" name="restrictions" />
+                </label>
+            </form>
+
                 <AddMember title="AddMember"></AddMember>
             <Panel title="Preferences" isActive={true}>
                 Please select the foods that you do not want.
                 <FoodSelect />
             </Panel>
-            </>
+
+            {/*repeating information*/}
+
+        {name !== 'First Last' && name !== '' && <p>Your name is {name}.</p>}
+        {(name == '' || name == 'First Last') && (
+          <p>
+            Please enter your username so we can give you the right food.
+          </p>
+        )}
+
+
+        {family > 1 && <p>You have {family} people in your household.</p>}
+        {family == 1 && <p>You have {family} person in your household.</p>}
+        {family <= 0 && (
+          <p>
+            {family} is not a possible number of people in your household.
+          </p>
+        )}
+        {family%1 !== 0 && <p> We unfortunatly cannot serve part of a person. Please correct the number.</p>}
+
+        {/*button*/}
+        {family >= 1 && family%1 == 0 && name !== 'First Last' && name !== '' && (
+            <Button      
+              onPress={() => {
+                alert('Submit');
+              }}>
+              <p>Submit</p>
+            </Button>
+        )}
+        </>
     );
 };
 
@@ -95,39 +156,84 @@ function Preferences() {
 
   function FoodSelect() {
     return (
-      <>
-    <Panel title="Beverages" isActive={true}>
-                  <Button buttonName="juice"><img src={a4gJuice} alt="juice"></img></Button>
-                  <Button buttonName="milk"><img src={a4gMilk} alt="milk"></img></Button>
+        <>
+            <form >
+                <Panel title="Beverages" isActive={true}>
+                    <label >
+                      <img src={a4gJuice} alt="juice"></img>
+                      Juice: <input type="checkbox" name="juice" />
+                      
+                  </label>
+                  <label >
+                    <Button buttonName="milk"><img src={a4gMilk} alt="milk"></img></Button>
+                      Milk: <input type="checkbox" name="milk" />
+                  </label>
                 </Panel>
+
                 <Panel title="Soup/Sauce" isActive={true}>
-                  <Button buttonName="PastaSauce"><img src={a4gPastaSauce} alt="sauce"></img></Button>
-                  <Button buttonName="TomSoup"><img src={a4gTomatoSoup} alt="tomato soup"></img></Button>
-                  <Button buttonName="ChickSoup"><img src={a4gChickenSoup} alt="chicken soup"></img></Button>
-                  <Button buttonName="MushSoup"><img src={a4gMushroomSoup} alt="mushroom soup"></img></Button>
+                  <label >
+                    <Button buttonName="PastaSauce"><img src={a4gPastaSauce} alt="sauce"></img></Button>
+                      Pasta Sauce: <input type="checkbox" name="sauce" />
+                  </label>
+                  <label >
+                    <Button buttonName="TomSoup"><img src={a4gTomatoSoup} alt="tomato soup"></img></Button>
+                      Tomato Soup: <input type="checkbox" name="tomatoSoup" />
+                  </label>
+                  <label >
+                    <Button buttonName="ChickSoup"><img src={a4gChickenSoup} alt="chicken soup"></img></Button>
+                      Chicken Soup: <input type="checkbox" name="chickenSoup" />
+                  </label>
+                  <label >
+                    <Button buttonName="MushSoup"><img src={a4gMushroomSoup} alt="mushroom soup"></img></Button>
+                      Mushroom Soup: <input type="checkbox" name="mushroomSoup" />
+                  </label>
                 </Panel>
+
                 <Panel title="Canned Vegetables" isActive={true}>
-                  <Button buttonName="GreenBeans"><img src={a4gGreenBeans} alt="green beans"></img></Button>
-                  <Button buttonName="Corn"><img src={a4gCorn} alt="corn"></img></Button>
-                  <Button buttonName="CanCarrot"><img src={a4gCanCarrots} alt="carrots"></img></Button>
+                  <label >
+                    <Button buttonName="GreenBeans"><img src={a4gGreenBeans} alt="green beans"></img></Button>
+                    Green Beans: <input type="checkbox" name="greenBean" />
+                    </label>
+                    <label >
+                    <Button buttonName="Corn"><img src={a4gCorn} alt="corn"></img></Button>
+                    Corn: <input type="checkbox" name="corn" />
+                  </label>
+                  <label >
+                    <Button buttonName="CanCarrot"><img src={a4gCanCarrots} alt="carrots"></img></Button>
+                    Carrots: <input type="checkbox" name="carrot" />
+                  </label>
                 </Panel>
+
                 <Panel title="Canned Fruit" isActive={true}>
-                  <Button buttonName="Pineapple"><img src={a4gPineapple} alt="pineapple"></img></Button>
-                  <Button buttonName="Pear"><img src={a4gPear} alt="pear"></img></Button>
-                  <Button buttonName="Peach"><img src={a4gPeach} alt="peach"></img></Button>
+                <label >
+                    <Button buttonName="Pineapple"><img src={a4gPineapple} alt="pineapple"></img></Button>
+                      Pineapple: <input type="checkbox" name="pineapple" />
+                  </label>
+                  <label >
+                    <Button buttonName="Pear"><img src={a4gPear} alt="pear"></img></Button>
+                      Pear: <input type="checkbox" name="pear" />
+                  </label>
+                  <label >
+                    <Button buttonName="Peach"><img src={a4gPeach} alt="peach"></img></Button>
+                      Peach: <input type="checkbox" name="peach" />
+                  </label>
                 </Panel>
+
                 <Panel title="Beans" isActive={true}>
                   <Button buttonName="Kidney"><img src={a4gKidney} alt="kidney beans"></img></Button>
                   <Button buttonName="Chickpea"><img src={a4gGarbanzo} alt="garbanzo beans/chickpeas"></img></Button>
                   <Button buttonName="Black"><img src={a4gBlack} alt="black beans"></img></Button>
                 </Panel>  
+
                 <Panel title="Assorted" isActive={true}>
                   <Button buttonName="PeanutButter"><img src={a4gPeanutButter} alt="peanut butter"></img></Button>
                 </Panel>
+
                 <Panel title="Cereal" isActive={true}>
                   <Button title="Cheerios"><img src={a4gCheerios} alt="cheerios"></img></Button>
                   <Button title="RiceKrispies"><img src={a4gRiceKrispies} alt="rice krispies"></img></Button>
                 </Panel>
+
                 <Panel title="Produce" isActive={true}>
                   <Button title="Apple"><img src={a4gApple} alt="apple"></img></Button>
                   <Button title="Potato"><img src={a4gPotato} alt="potato"></img></Button>
@@ -138,25 +244,30 @@ function Preferences() {
                   <Button title="Squash"><img src={a4gSquash} alt="squash"></img></Button>
                   <Button title="Carrots"><img src={a4gCarrots} alt="carrots"></img></Button>
                 </Panel>
+
                 <Panel title="Meat" isActive={true}>
                   <Panel title="Poultry" isActive={true}>
                     <Button title="Chicken"><img src={a4gChicken} alt="chicken"></img></Button>
                     <Button title="Turkey"><img src={a4gTurkey} alt="turkey"></img></Button>
                   </Panel>
+
                   <Panel title="Beef" isActive={true}>
                     <Button title="Hamburger"><img src={a4gHamburger} alt="hamburger"></img></Button>
                   </Panel>
+
                   <Panel title="Fish" isActive={true}>
                     <Button title="WhiteFish"><img src={a4gWhiteFish} alt="white fish"></img></Button>
                     <Button title="RedFish"><img src={a4gRedFish} alt="red fish"></img></Button>
                   </Panel>
+
                 </Panel>
                 <Panel title="Other Noncanned" isActive={true}>
                   <Button title="Cheese"><img src={a4gCheese} alt="cheese"></img></Button>
                   <Button title="Bread"><img src={a4gBread} alt="bread"></img></Button>
                   <Button title="Eggs"><img src={a4gEggs} alt="eggs"></img></Button>
                 </Panel>
-                </>
+            </form>
+        </>
     )
   }
 
@@ -176,5 +287,6 @@ function Preferences() {
       </>
     );
   }
+
 
 export default Preferences;

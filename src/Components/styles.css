@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+html {
+    padding: 0px;
+}
+
+body:not(html):not(#root):not(nav) {
+    margin: 5px;
+}
 body {
     margin: 0;
 }
@@ -14,6 +21,7 @@ body {
     align-items: stretch;
     gap: 2rem;
     padding: 0 1rem;
+    margin: 0px;
 }
 
 .site-title {
@@ -75,4 +83,20 @@ body {
     border: 8px solid #58355E;
     margin: 1%;
     border-radius: 12px;
+}
+
+.time-button {
+    color: #58355E;
+    border: 8px solid #58355E;
+    background-color: lightgray;
+    margin: 0.5%;
+    width: 400px;
+    max-width: 95vw;
+    height: 40px;
+    max-height: 19vw;
+    border-radius: 12px;
+}
+
+.time-button:hover {
+    background-color:gray;
 }
