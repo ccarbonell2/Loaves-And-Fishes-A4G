@@ -37,6 +37,45 @@ import a4gCheese from "./Images/a4gCheese.png";
 import a4gBread from "./Images/a4gBread.png";
 import a4gEggs from "./Images/a4gEggs.png";
 
+const foods = [];
+const foodList = [
+  "Juice", 
+  "Milk", 
+  "Pasta Sauce",
+  "Tomato Soup",
+  "Chicken Soup",
+  "Mushroom Soup",
+  "Green Beans", 
+  "Corn",
+  "Carrots",
+  "Pineapple",
+  "Pear",
+  "Peach",
+  "Kidney Beans",
+  "Chickpeas/garbanzo beans",
+  "Black beans",
+  "Peanut Butter",
+  "Cheerios",
+  "Rice Krispies",
+  "Apple",
+  "Potato",
+  "Onion",
+  "Sweet potato",
+  "Yams",
+  "Lettuce",
+  "Squash",
+  "Carrots",
+  "Chicken",
+  "Turkey",
+  "Hamburger",
+  "White fish",
+  "Red fish",
+  "Cheese",
+  "Bread",
+  "Eggs"
+];
+const data = {};
+
 /*import pool from './db';
 
 const connection = pool.connect();*/
@@ -44,7 +83,12 @@ const connection = pool.connect();*/
 function Preferences() {
     /*variables*/
     const [name, setName] = useState('First Last');
-    const [family, setFamily] = useState('1');
+    const [family, setFamily] = useState(1);
+    const [allergies, setAllergies] = useState('');
+
+    for (let i = 0; i < foodList.length; i++) {
+      foods[i] = 0;
+    }
 
     return (
         <>
@@ -74,20 +118,22 @@ function Preferences() {
                     type="number"
                     name="family"
                 />
-                </label>
+                </label><br />
                 <br />
 
                 <label>
                 Please list any allergies or dietary restrictions:{' '}
-                <input type="text" name="restrictions" />
-                </label>
+                <input 
+                  value = {allergies}
+                  type="text" 
+                  name="restrictions"
+                  onChange={(e) => setAllergies(e.targetvalue)}
+                />
+                </label><br />
             </form>
 
-                <AddMember title="AddMember"></AddMember>
-            <Panel title="Preferences" isActive={true}>
-                Please select the foods that you do not want.
+            Please select the foods that you do not want.
                 <FoodSelect />
-            </Panel>
 
             {/*repeating information*/}
 
@@ -110,12 +156,7 @@ function Preferences() {
 
         {/*button*/}
         {family >= 1 && family%1 == 0 && name !== 'First Last' && name !== '' && (
-            <Button      
-              onPress={() => {
-                alert('Submit');
-              }}>
-              <p>Submit</p>
-            </Button>
+            <button type="submit" onClick={() => Submit(name, family/*, allergies*/)}>Submit</button>
         )}
         </>
     );
@@ -128,7 +169,7 @@ function Preferences() {
         {isActive ? (
           <p>{children}</p>
         ) : (
-          <button class={"normButton"} onClick={() => setIsActive(true)}>
+          <button className={"normButton"} onClick={() => setIsActive(true)}>
             {title}
           </button>
         )}
@@ -146,7 +187,7 @@ function Preferences() {
           <FoodSelect />
           </>
         ) : (
-          <button class={"normButton"} onClick={() => setIsActive(true)}>
+          <button className={"normButton"} onClick={() => setIsActive(true)}>
             {title}
           </button>
         )}
@@ -154,121 +195,206 @@ function Preferences() {
     );
   }
 
+  function setFood(foodIndex) {
+    foods[foodIndex] += 1;
+  }
+
   function FoodSelect() {
     return (
         <>
             <form >
                 <Panel title="Beverages" isActive={true}>
-                    <label >
-                      <img src={a4gJuice} alt="juice"></img>
-                      Juice: <input type="checkbox" name="juice" />
-                      
-                  </label>
                   <label >
-                    <Button buttonName="milk"><img src={a4gMilk} alt="milk"></img></Button>
-                      Milk: <input type="checkbox" name="milk" />
-                  </label>
+                    <img src={a4gJuice} alt="juice"></img>
+                    Juice: <input type="checkbox" name="juice" onChange={() => setFood(0)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gMilk} alt="milk"></img>
+                    Milk: <input type="checkbox" name="milk" onChange={() => setFood(1)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Soup/Sauce" isActive={true}>
                   <label >
-                    <Button buttonName="PastaSauce"><img src={a4gPastaSauce} alt="sauce"></img></Button>
-                      Pasta Sauce: <input type="checkbox" name="sauce" />
-                  </label>
+                    <img src={a4gPastaSauce} alt="sauce"></img>
+                    Pasta Sauce: <input type="checkbox" name="sauce" onChange={() => setFood(2)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="TomSoup"><img src={a4gTomatoSoup} alt="tomato soup"></img></Button>
-                      Tomato Soup: <input type="checkbox" name="tomatoSoup" />
-                  </label>
+                    <img src={a4gTomatoSoup} alt="tomato soup"></img>
+                    Tomato Soup: <input type="checkbox" name="tomatoSoup" onChange={() => setFood(3)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="ChickSoup"><img src={a4gChickenSoup} alt="chicken soup"></img></Button>
-                      Chicken Soup: <input type="checkbox" name="chickenSoup" />
-                  </label>
+                    <img src={a4gChickenSoup} alt="chicken soup"></img>
+                    Chicken Soup: <input type="checkbox" name="chickenSoup" onChange={() => setFood(4)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="MushSoup"><img src={a4gMushroomSoup} alt="mushroom soup"></img></Button>
-                      Mushroom Soup: <input type="checkbox" name="mushroomSoup" />
-                  </label>
+                    <img src={a4gMushroomSoup} alt="mushroom soup"></img>
+                    Mushroom Soup: <input type="checkbox" name="mushroomSoup" onChange={() => setFood(5)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Canned Vegetables" isActive={true}>
                   <label >
-                    <Button buttonName="GreenBeans"><img src={a4gGreenBeans} alt="green beans"></img></Button>
-                    Green Beans: <input type="checkbox" name="greenBean" />
-                    </label>
-                    <label >
-                    <Button buttonName="Corn"><img src={a4gCorn} alt="corn"></img></Button>
-                    Corn: <input type="checkbox" name="corn" />
-                  </label>
+                    <img src={a4gGreenBeans} alt="green beans"></img>
+                    Green Beans: <input type="checkbox" name="greenBean" onChange={() => setFood(6)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="CanCarrot"><img src={a4gCanCarrots} alt="carrots"></img></Button>
-                    Carrots: <input type="checkbox" name="carrot" />
-                  </label>
+                    <img src={a4gCorn} alt="corn"></img>
+                    Corn: <input type="checkbox" name="corn" onChange={() => setFood(7)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gCanCarrots} alt="carrots"></img>
+                    Carrots: <input type="checkbox" name="carrot" onChange={() => setFood(8)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Canned Fruit" isActive={true}>
                 <label >
-                    <Button buttonName="Pineapple"><img src={a4gPineapple} alt="pineapple"></img></Button>
-                      Pineapple: <input type="checkbox" name="pineapple" />
-                  </label>
+                    <img src={a4gPineapple} alt="pineapple"></img>
+                    Pineapple: <input type="checkbox" name="pineapple" onChange={() => setFood(9)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="Pear"><img src={a4gPear} alt="pear"></img></Button>
-                      Pear: <input type="checkbox" name="pear" />
-                  </label>
+                    <img src={a4gPear} alt="pear"></img>
+                    Pear: <input type="checkbox" name="pear" onChange={() => setFood(10)} />
+                  </label><br />
                   <label >
-                    <Button buttonName="Peach"><img src={a4gPeach} alt="peach"></img></Button>
-                      Peach: <input type="checkbox" name="peach" />
-                  </label>
+                    <img src={a4gPeach} alt="peach"></img>
+                    Peach: <input type="checkbox" name="peach" onChange={() => setFood(11)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Beans" isActive={true}>
-                  <Button buttonName="Kidney"><img src={a4gKidney} alt="kidney beans"></img></Button>
-                  <Button buttonName="Chickpea"><img src={a4gGarbanzo} alt="garbanzo beans/chickpeas"></img></Button>
-                  <Button buttonName="Black"><img src={a4gBlack} alt="black beans"></img></Button>
+                  <label >
+                    <img src={a4gKidney} alt="kidney beans"></img>
+                    Kidney Beans: <input type="checkbox" name="kidneyBean" onChange={() => setFood(12)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gGarbanzo} alt="garbanzo beans/chickpeas"></img>
+                    Chickpeas and garbanzo beans: <input type="checkbox" name="chickpeas" onChange={() => setFood(13)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gBlack} alt="black beans"></img>
+                    Black Beans: <input type="checkbox" name="blackBeans" onChange={() => setFood(14)} />
+                  </label><br />
                 </Panel>  
 
                 <Panel title="Assorted" isActive={true}>
-                  <Button buttonName="PeanutButter"><img src={a4gPeanutButter} alt="peanut butter"></img></Button>
+                  <label >
+                    <img src={a4gPeanutButter} alt="peanut butter"></img>
+                    Peanut Butter: <input type="checkbox" name="peanutButter" onChange={() => setFood(15)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Cereal" isActive={true}>
-                  <Button title="Cheerios"><img src={a4gCheerios} alt="cheerios"></img></Button>
-                  <Button title="RiceKrispies"><img src={a4gRiceKrispies} alt="rice krispies"></img></Button>
+                  <label >
+                    <img src={a4gCheerios} alt="cheerios"></img>
+                    Cheerios: <input type="checkbox" name="cheerios" onChange={() => setFood(16)} />
+                  </label><br />
+                  <label >
+                  <img src={a4gRiceKrispies} alt="rice krispies"></img>
+                    Rice Krispies: <input type="checkbox" name="riceKrispies" onChange={() => setFood(17)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Produce" isActive={true}>
-                  <Button title="Apple"><img src={a4gApple} alt="apple"></img></Button>
-                  <Button title="Potato"><img src={a4gPotato} alt="potato"></img></Button>
-                  <Button title="Onions"><img src={a4gOnions} alt="onion"></img></Button>
-                  <Button title="SweetPotato"><img src={a4gSweetPotato} alt="sweet potato"></img></Button>
-                  <Button title="Yam"><img src={a4gYams} alt="yams"></img></Button>
-                  <Button title="Lettuce"><img src={a4gLettuce} alt="lettuce"></img></Button>
-                  <Button title="Squash"><img src={a4gSquash} alt="squash"></img></Button>
-                  <Button title="Carrots"><img src={a4gCarrots} alt="carrots"></img></Button>
+                  <label >
+                    <img src={a4gApple} alt="apple"></img>
+                    Apple: <input type="checkbox" name="apple" onChange={() => setFood(18)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gPotato} alt="potato"></img>
+                    Potato: <input type="checkbox" name="potato" onChange={() => setFood(19)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gOnions} alt="onion"></img>
+                    Onion: <input type="checkbox" name="onion" onChange={() => setFood(20)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gSweetPotato} alt="sweet potato"></img>
+                    Sweet Potato: <input type="checkbox" name="sweetPotato" onChange={() => setFood(21)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gYams} alt="yams"></img>
+                    Yams: <input type="checkbox" name="yams" onChange={() => setFood(22)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gLettuce} alt="lettuce"></img>
+                    Lettuce: <input type="checkbox" name="lettuce" onChange={() => setFood(23)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gSquash} alt="squash"></img>
+                    Squash: <input type="checkbox" name="squash" onChange={() => setFood(24)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gCarrots} alt="carrots"></img>
+                    Carrots: <input type="checkbox" name="carrots" onChange={() => setFood(25)} />
+                  </label><br />
                 </Panel>
 
                 <Panel title="Meat" isActive={true}>
                   <Panel title="Poultry" isActive={true}>
-                    <Button title="Chicken"><img src={a4gChicken} alt="chicken"></img></Button>
-                    <Button title="Turkey"><img src={a4gTurkey} alt="turkey"></img></Button>
+                    <label >
+                      <img src={a4gChicken} alt="chicken"></img>
+                      Chicken: <input type="checkbox" name="chicken" onChange={() => setFood(26)} />
+                    </label><br />
+                    <label >
+                      <img src={a4gTurkey} alt="turkey"></img>
+                      Turkey: <input type="checkbox" name="turkey" onChange={() => setFood(27)} />
+                    </label><br />
                   </Panel>
 
                   <Panel title="Beef" isActive={true}>
-                    <Button title="Hamburger"><img src={a4gHamburger} alt="hamburger"></img></Button>
+                    <label >
+                      <img src={a4gHamburger} alt="hamburger"></img>
+                      Hamburger: <input type="checkbox" name="hamburger" onChange={() => setFood(28)} />
+                    </label><br />
                   </Panel>
 
                   <Panel title="Fish" isActive={true}>
-                    <Button title="WhiteFish"><img src={a4gWhiteFish} alt="white fish"></img></Button>
-                    <Button title="RedFish"><img src={a4gRedFish} alt="red fish"></img></Button>
+                    <label >
+                      <img src={a4gWhiteFish} alt="white fish"></img>
+                      White fish: <input type="checkbox" name="whiteFish" onChange={() => setFood(29)} />
+                    </label><br />
+                    <label >
+                      <img src={a4gRedFish} alt="red fish"></img>
+                      Red Fish: <input type="checkbox" name="redFish" onChange={() => setFood(30)} />
+                    </label><br />
                   </Panel>
 
                 </Panel>
                 <Panel title="Other Noncanned" isActive={true}>
-                  <Button title="Cheese"><img src={a4gCheese} alt="cheese"></img></Button>
-                  <Button title="Bread"><img src={a4gBread} alt="bread"></img></Button>
-                  <Button title="Eggs"><img src={a4gEggs} alt="eggs"></img></Button>
+                  <label >
+                  <img src={a4gCheese} alt="cheese"></img>
+                    Cheese: <input type="checkbox" name="cheese" onChange={() => setFood(31)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gBread} alt="bread"></img>
+                    Bread: <input type="checkbox" name="bread" onChange={() => setFood(32)} />
+                  </label><br />
+                  <label >
+                    <img src={a4gEggs} alt="eggs"></img>
+                    Eggs: <input type="checkbox" name="eggs" onChange={() => setFood(33)} />
+                  </label><br />
                 </Panel>
             </form>
         </>
     )
+  }
+
+  function Submit(name, family/*, allergies*/) {
+    data.name = name;
+    data.family = family;
+    /*data.allergies = allergies;*/
+    let dataString = '';
+    for (let i = 0; i < foodList.length; i++) {
+      if (foods[i] % 2 === 0)
+        data[foodList[i]] = false;
+      else
+        data[foodList[i]] = true;
+    }
+    for (var property in data)
+      dataString += property + " = " + data[property] + "\n";
+    alert(dataString);
   }
 
   function Button({buttonName, children}) {
@@ -276,11 +402,11 @@ function Preferences() {
     return (
       <>
         {isActive ? (
-          <button class={"activeBev"}>
+          <button className={"activeBev"}>
             {children}
           </button>
         ) : (
-          <button class={"inactiveButton"} onClick={() => setIsActive(true)}>
+          <button className={"inactiveButton"} onClick={() => setIsActive(true)}>
             {children}
           </button>
         )}
