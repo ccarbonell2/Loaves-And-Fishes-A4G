@@ -82,7 +82,7 @@ const connection = pool.connect();*/
 
 function Preferences() {
     /*variables*/
-    const [name, setName] = useState('First Last');
+    const [name, setName] = useState('');
     const [family, setFamily] = useState(1);
     const [allergies, setAllergies] = useState('');
 
@@ -122,12 +122,12 @@ function Preferences() {
                 <br />
 
                 <label>
-                Please list any allergies or dietary restrictions:{' '}
-                <input 
-                  value = {allergies}
-                  type="text" 
-                  name="restrictions"
-                  onChange={(e) => setAllergies(e.targetvalue)}
+                Enter any allergies and dietary restrictions:{' '}
+                <input
+                    value={allergies}
+                    onChange={(e) => setAllergies(e.target.value)}
+                    type="text"
+                    name="allergies"
                 />
                 </label><br />
             </form>
@@ -137,8 +137,8 @@ function Preferences() {
 
             {/*repeating information*/}
 
-        {name !== 'First Last' && name !== '' && <p>Your name is {name}.</p>}
-        {(name == '' || name == 'First Last') && (
+        {name !== 'default' && name !== '' && <p>Your name is {name}.</p>}
+        {(name == '' || name == 'default') && (
           <p>
             Please enter your username so we can give you the right food.
           </p>
@@ -155,8 +155,8 @@ function Preferences() {
         {family%1 !== 0 && <p> We unfortunatly cannot serve part of a person. Please correct the number.</p>}
 
         {/*button*/}
-        {family >= 1 && family%1 == 0 && name !== 'First Last' && name !== '' && (
-            <button type="submit" onClick={() => Submit(name, family/*, allergies*/)}>Submit</button>
+        {family >= 1 && family%1 == 0 && name !== 'default' && name !== '' && (
+            <button type="submit" onClick={() => Submit(name, family, allergies)}>Submit</button>
         )}
         </>
     );
@@ -381,10 +381,10 @@ function Preferences() {
     )
   }
 
-  function Submit(name, family/*, allergies*/) {
+  function Submit(name, family, allergies) {
     data.name = name;
     data.family = family;
-    /*data.allergies = allergies;*/
+    data.allergies = allergies;
     let dataString = '';
     for (let i = 0; i < foodList.length; i++) {
       if (foods[i] % 2 === 0)
